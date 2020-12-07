@@ -16,10 +16,37 @@ window.addEventListener("load", function() {
       if (!isNaN(pilotName.value)  || !isNaN(copilotName.value) ) {
          alert("Please enter valid name for Pilot  and Co-pilot");
       }
-     //validate teh cargo and fuel inputs are numbers
+     //validate cargo and fuel inputs are numbers
       if (isNaN(cargoMassInput.value) || isNaN(fuelLevelInput.value)) {
          alert("Please enter valid number for Fuel Level and Cargo Mass");
       } 
+      document.getElementById("pilotStatus").innerHTML = "Pilot " + pilotName.value + " Ready";
+         document.getElementById("copilotStatus").innerHTML = "Co-pilot " + copilotName.value + " Ready";
+      //validate the fuel range
+      if(fuelLevelInput.value <= 10000){
+         document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch.";
+         document.getElementById("fuelStatus").innerHTML = "There is not enough fuel for the journey.";
+         document.getElementById("launchStatus").style.color = "red";
+         document.getElementById("faultyItems").style.visibility = "visible";
+      }else{
+         document.getElementById("fuelStatus").innerHTML = "Fuel level enough for launch";
+      }
+      // validate the cargo range
+      if(cargoMassInput.value >= 10000){
+         document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch.";
+         document.getElementById("cargoStatus").innerHTML = "There is too much mass for the shuttle to take off.";
+         document.getElementById("launchStatus").style.color = "red";
+         document.getElementById("faultyItems").style.visibility = "visible";
+      }else{
+         document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch";
+      }
+      // update launch status
+      if (cargoMassInput.value <= 10000 && fuelLevelInput.value >= 10000) {
+         document.getElementById("launchStatus").innerHTML = "Shuttle Ready for Launch";
+         document.getElementById("launchStatus").style.color = "green";
+         document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch";
+         document.getElementById("faultyItems").style.visibility = "hidden";
+      }
    })
 
 })
