@@ -1,6 +1,31 @@
 // Write your JavaScript code here!
 // Event listener for page load
 window.addEventListener("load", function() {
+   // TODO: fetch planets JSON
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+      // response is a promise so we need to return json from it first before accessing the data
+      response.json().then(function (json) {
+         // once we have the data, find the missionTarget element on the page
+         const missionTarget = document.getElementById("missionTarget");
+         let index =Math.floor(Math.random()*5);
+         
+         missionTarget.innerHTML =`
+            <h2>Mission Destination</h2>
+         
+         <ol>
+            <li>Name: ${json[index].name}</li>
+            <li>Diameter: ${json[index].diameter}</li>
+            <li>Star: ${json[index].star}</li>
+            <li>Distance from Earth: ${json[index].distance}</li>
+            <li>Number of Moons: ${json[index].moons}</li>
+         </ol>
+         <img src="${json[index].image}">
+         `
+         //console.log(response);
+         
+      })
+               
+            } );
    let form = document.querySelector("form");
    let pilotName = document.querySelector('input[name="pilotName"]');
    let copilotName = document.querySelector('input[name="copilotName"]');
@@ -14,14 +39,14 @@ window.addEventListener("load", function() {
       }
       //validate pilot name and co pilat name is a string
       if (!isNaN(pilotName.value)  || !isNaN(copilotName.value) ) {
-         alert("Please enter valid name for Pilot  and Co-pilot");
+         alert("Please enter valid name for Pilot  and Co-pilot.");
       }
      //validate cargo and fuel inputs are numbers
       if (isNaN(cargoMassInput.value) || isNaN(fuelLevelInput.value)) {
-         alert("Please enter valid number for Fuel Level and Cargo Mass");
+         alert("Please enter valid number for Fuel Level and Cargo Mass.");
       } 
-      document.getElementById("pilotStatus").innerHTML = "Pilot " + pilotName.value + " Ready";
-         document.getElementById("copilotStatus").innerHTML = "Co-pilot " + copilotName.value + " Ready";
+      document.getElementById("pilotStatus").innerHTML = "Pilot " + pilotName.value + " Ready.";
+         document.getElementById("copilotStatus").innerHTML = "Co-pilot " + copilotName.value + " Ready.";
       //validate the fuel range
       if(fuelLevelInput.value <= 10000){
          document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch.";
@@ -29,7 +54,7 @@ window.addEventListener("load", function() {
          document.getElementById("launchStatus").style.color = "red";
          document.getElementById("faultyItems").style.visibility = "visible";
       }else{
-         document.getElementById("fuelStatus").innerHTML = "Fuel level enough for launch";
+         document.getElementById("fuelStatus").innerHTML = "Fuel level enough for launch.";
       }
       // validate the cargo range
       if(cargoMassInput.value >= 10000){
@@ -38,13 +63,13 @@ window.addEventListener("load", function() {
          document.getElementById("launchStatus").style.color = "red";
          document.getElementById("faultyItems").style.visibility = "visible";
       }else{
-         document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch";
+         document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch.";
       }
       // update launch status
       if (cargoMassInput.value <= 10000 && fuelLevelInput.value >= 10000) {
-         document.getElementById("launchStatus").innerHTML = "Shuttle Ready for Launch";
+         document.getElementById("launchStatus").innerHTML = "Shuttle Ready for Launch.";
          document.getElementById("launchStatus").style.color = "green";
-         document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch";
+         document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch.";
          document.getElementById("faultyItems").style.visibility = "hidden";
       }
    })
