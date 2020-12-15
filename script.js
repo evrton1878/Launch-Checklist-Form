@@ -26,7 +26,7 @@ window.addEventListener("load", function() {
       })
                
             } );
-   let form = document.querySelector("form");
+   let form = document.querySelector('form');
    let pilotName = document.querySelector('input[name="pilotName"]');
    let copilotName = document.querySelector('input[name="copilotName"]');
    let fuelLevelInput = document.querySelector('input[name="fuelLevel"]');
@@ -36,17 +36,19 @@ window.addEventListener("load", function() {
       //validate for emty fields
       if (pilotName.value === "" || copilotName.value === "" || cargoMassInput.value === "" || fuelLevelInput.value === "") {
          alert("Plese all fields are required!");
-      }
-      //validate pilot name and co pilat name is a string
-      if (!isNaN(pilotName.value)  || !isNaN(copilotName.value) ) {
+         //event.preventDefault();
+         //validate pilot name and co pilat name is a string
+      }else if(!isNaN(pilotName.value)  || !isNaN(copilotName.value) ) {
          alert("Please enter valid name for Pilot  and Co-pilot.");
-      }
-     //validate cargo and fuel inputs are numbers
-      if (isNaN(cargoMassInput.value) || isNaN(fuelLevelInput.value)) {
+         //event.preventDefault();
+         //validate cargo and fuel inputs are numbers
+      }else if(isNaN(cargoMassInput.value) || isNaN(fuelLevelInput.value)) {
          alert("Please enter valid number for Fuel Level and Cargo Mass.");
-      } 
+         //event.preventDefault();
+      }else{
       document.getElementById("pilotStatus").innerHTML = "Pilot " + pilotName.value + " Ready.";
-         document.getElementById("copilotStatus").innerHTML = "Co-pilot " + copilotName.value + " Ready.";
+      document.getElementById("copilotStatus").innerHTML = "Co-pilot " + copilotName.value + " Ready.";
+      
       //validate the fuel range
       if(fuelLevelInput.value <= 10000){
          document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch.";
@@ -72,6 +74,7 @@ window.addEventListener("load", function() {
          document.getElementById("cargoStatus").innerHTML = "Cargo mass good for launch.";
          document.getElementById("faultyItems").style.visibility = "hidden";
       }
+   }
    })
 
 })
